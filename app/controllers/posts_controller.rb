@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-
+  before_action :validate_autorization, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
   # GET /posts or /posts.json
   def index
     @posts = Post.all
@@ -24,7 +25,7 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-
+    @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: "Post was successfully created." }
@@ -64,8 +65,16 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    def validate_autorization
+      if current_user == @post.user
+        #TODO: message and work for changed of post
+        true
+      else
+        redirect_back(fallback_location: root_path, notice: "Post cannot be changed by non-author ")
+      end
+    end
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:description, :image)
+      params.require(:post).permit(:description, :image, :user_id)
     end
 end
