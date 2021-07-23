@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     comment = Comment.new(comment_params)
     #comment.user_id = current_user.id
     comment.save
-    redirect_to post_path(comment_params[:post_id])
+    redirect_back(fallback_location: user_posts_path(comment_params[:user_id]))
   end
 
   private

@@ -1,0 +1,6 @@
+<h1>Profile</h1>
+<p> User name:  <%= @user.name %><p>
+<p> User email: <%= @user.email %><p>
+<p> User bio: <%= @user.bio %></p>
+<br>
+<%= link_to "Posts", user_posts_path(@user) %>
