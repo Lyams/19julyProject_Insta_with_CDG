@@ -20,9 +20,9 @@
         <td><%= image_tag post.image_url %></td>
         <td> <%= post.user.name %></td>
         <td><%= post.comments.count %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', user_post_path(@user, post) %></td>
+        <td><%= link_to 'Edit', edit_user_post_path(@user, post) %></td>
+        <td><%= link_to 'Destroy', user_post_path(@user, post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path, class:"btn btn-primary" %>
+<%= link_to 'New Post', new_user_post_path, class:"btn btn-primary" %>
