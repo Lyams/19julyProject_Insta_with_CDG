@@ -16,7 +16,8 @@
   <% if user_signed_in? %>
   <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
   <%= link_to 'Settings', edit_user_registration_path %>
-  <%= link_to 'Profile', user_path(current_user) %>
+  <%= link_to 'Profile', user_path(@user || current_user) %>
+  <%= link_to "Feed", feed_posts_path %>
     <% else %>
     <%= link_to 'Log in', new_user_session_path %>
     <%= link_to 'Sing up', new_user_registration_path %>
