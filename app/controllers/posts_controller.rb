@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include Pundit
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_user
   before_action :set_post, only: %i[ show edit update destroy ]
@@ -21,8 +22,10 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  # GET /posts/1/edit
+  # GET /posts/1/edit2
   def edit
+    @post = @user.posts.find(params[:id])
+    authorize @post
   end
 
   # POST /posts or /posts.json
@@ -40,6 +43,8 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
+    @post = @user.posts.find(params[:id])
+    authorize @post
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to user_post_path(@user, @post), notice: "Post was successfully updated." }
@@ -51,6 +56,8 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
+    @post = @user.posts.find(params[:id])
+    authorize @post
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
