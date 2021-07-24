@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  include Pundit
+
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_user
   before_action :set_post, only: %i[ show edit update destroy ]
