@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :followers, only: :index
     resources :followings, only: :index
   end
-  resources :follows, only: [:create]
+  resources :follows, only: [:create, :destroy]
   resources :feed_posts, only: [:index]
   resources :comments, only: [:new, :create]
   #root to: "users/#{User.all.first.id}"
