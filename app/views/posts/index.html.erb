@@ -21,13 +21,19 @@
         <td> <%= post.user.name %></td>
         <td><%= post.comments.count %></td>
         <td><%= link_to 'Show', user_post_path(post.user, post) %></td>
-        <td><%= link_to 'Edit', edit_user_post_path(post.user, post) %></td>
-        <td><%= link_to 'Destroy', user_post_path(post.user, post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if user_signed_in? %>
+        <% if policy(post).update? %>
+          <td><%= link_to 'Edit', edit_user_post_path(post.user, post) %></td>
+        <% end %>
+        <% if policy(post).destroy? %>
+          <td><%= link_to 'Destroy', user_post_path(post.user, post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <% end %>
+         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
+<%= link_to 'Back', user_posts_path(current_user) if user_signed_in? %>
 <%= link_to 'New Post', new_user_post_path, class:"btn btn-primary" %>
