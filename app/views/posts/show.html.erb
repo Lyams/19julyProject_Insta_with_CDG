@@ -25,13 +25,22 @@
   <% end %>
 
 </br>
-<p>
+
 <% if user_signed_in? %>
-<%= render 'comments_form', comment: @comment %>
+  <% if Like.find_by(current_user, @post) %>
+   <p>
+    <%= link_to "Like", likes_path(@post), method: :post %>
+  </p>
+  <% else %>
+    <%= link_to "UnLike", like_path(@post), method: :delete %>
+  <% end %>
+  </br>
+    <%= render 'comments_form', comment: @comment %>
 <% else %>
-  For comments need log in
+  <p> For comments and likes need log in </p>
 <%end %>
 
-</p>
+
+
 <%= link_to 'Edit', edit_user_post_path(@user, @post) %> |
 <%= link_to 'Back', user_posts_path(@user) %>
