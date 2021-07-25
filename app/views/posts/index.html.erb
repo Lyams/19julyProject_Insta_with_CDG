@@ -8,6 +8,7 @@
       <th>Description</th>
       <th>Image data</th>
       <th>Autor</th>
+      <th>Likes</th>
       <th>Count of comments</th>
       <th colspan=""></th>
     </tr>
@@ -19,6 +20,7 @@
         <td><%= post.description %></td>
         <td><%= image_tag post.image_url %></td>
         <td> <%= post.user.name %></td>
+        <td> <%= post.likes.count %> </td>
         <td><%= post.comments.count %></td>
         <td><%= link_to 'Show', user_post_path(post.user, post) %></td>
         <% if user_signed_in? %>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :follows, only: [:create, :destroy]
   resources :feed_posts, only: [:index]
   resources :comments, only: [:new, :create]
+  resources :likes, only: [:new, :create, :destroy]
   #root to: "users/#{User.all.first.id}"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
