@@ -1,19 +1,14 @@
 class LikesController < ApplicationController
   def create
-    post = Post.find(params[:post])
-    Like.create(current_user, post)
-    redirect_back(fallback_location: user_posts_path(likes_params[:user_id, :id]))
+    post = Post.find(params[:id])
+    Like.create(user_id: current_user.id, post_id: post.id)
+    redirect_back(fallback_location: user_posts_path(post))
   end
 
   def destroy
-    post = Post.find(params[:post])
-    Like.destroy(current_user, post)
-    redirect_back(fallback_location: user_posts_path(likes_params[:user_id, :id]))
+    post = Post.find(params[:id])
+    Like.where(post_id: post.id, user_id: current_user.id).destroy_all
+    redirect_back(fallback_location: user_posts_path(post))
   end
 
-  private
-
-  def likes_param
-    params.require(:post).permit(:id, :user_id)
-  end
 end

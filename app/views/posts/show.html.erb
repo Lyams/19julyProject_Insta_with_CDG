@@ -27,12 +27,12 @@
 </br>
 
 <% if user_signed_in? %>
-  <% if Like.find_by(current_user, @post) %>
+  <% unless Like.find_by(post_id: @post.id, user_id: current_user.id) %>
    <p>
-    <%= link_to "Like", likes_path(@post), method: :post %>
+    <%= link_to "Like", likes_path(id: @post.id), method: :post %>
   </p>
   <% else %>
-    <%= link_to "UnLike", like_path(@post), method: :delete %>
+    <%= link_to "UnLike", like_path(id: @post.id), method: :delete %>
   <% end %>
   </br>
     <%= render 'comments_form', comment: @comment %>
