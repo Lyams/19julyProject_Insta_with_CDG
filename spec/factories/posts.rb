@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :post do
+    association :user
     description {Faker::GreekPhilosophers.quote}
         image_data { TestData.image_data }
-    association :user
   end
 end
 

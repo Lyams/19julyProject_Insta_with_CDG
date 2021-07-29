@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
+  #let(:user) {create(:user)}
   subject { build(:post) }
 
   it { should respond_to(:description) }
