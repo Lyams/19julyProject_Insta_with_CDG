@@ -13,16 +13,17 @@
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: 'form-control' %>
   </div>
 
 
   <div class="field">
+    <%= image_tag form.object.image_url if form.object.cached_image_data %>>
     <%= form.hidden_field :image, value: post.cached_image_data %>
-    <%= form.file_field :image %>
+    <%= form.file_field :image, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:'btn btn-primary' %>
   </div>
 <% end %>
