@@ -1,41 +1,31 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Image data</th>
-      <th>Autor</th>
-      <th>Likes</th>
-      <th>Count of comments</th>
-      <th colspan=""></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.description %></td>
-        <td><%= image_tag post.image_url %></td>
-        <td> <%= post.user.name %></td>
-        <td> <%= post.likes.count %> </td>
-        <td><%= post.comments.count %></td>
-        <td><%= link_to 'Show', user_post_path(post.user, post) %></td>
-        <% if user_signed_in? %>
+<div class="row">
+<% @posts.each do |post| %>
+  <div class="card" style="width: 50rem;">
+    <%= image_tag post.image_url %>
+    <div class="card-body">
+      <h1 class="card-title">Author: <%= post.user.name %></h1>
+      <h1> Likes: <%= post.likes.count%> </h1>
+      <p> Comments: <%= post.comments.count %> <p>
+      <p class="card-text"><%= post.description %></p>
+      <%= link_to 'Show', user_post_path(post.user, post), class:"btn btn-outline-secondary" %>
+      <% if user_signed_in? %>
         <% if policy(post).update? %>
-          <td><%= link_to 'Edit', edit_user_post_path(post.user, post) %></td>
+          <%= link_to 'Edit', edit_user_post_path(post.user, post), class:"btn btn-outline-warning" %>
         <% end %>
         <% if policy(post).destroy? %>
-          <td><%= link_to 'Destroy', user_post_path(post.user, post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-         <% end %>
-         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+          <%= link_to 'Destroy', user_post_path(post.user, post), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  </br>
+<% end %>
+</div>
 <br>
-<%= link_to 'Back', user_posts_path(current_user) if user_signed_in? %>
-<%= link_to 'New Post', new_user_post_path(current_user), class:"btn btn-primary" %>
+<% if user_signed_in? %>
+<%= link_to 'Back', user_posts_path(current_user), class:"btn btn-outline-success"  %>
+<%= link_to 'New Post', new_user_post_path(current_user), class:"btn btn-outline-primary" %>
+<% end %>
