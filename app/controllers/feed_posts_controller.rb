@@ -5,7 +5,7 @@ class FeedPostsController < ApplicationController
     if current_user.followings.exists?
       @posts = Post.where( user_id: current_user.followings.pluck(:id)).order(created_at: :desc)
     else
-      Post.none
+      @posts = Post.none
     end
     render 'posts/index'
   end

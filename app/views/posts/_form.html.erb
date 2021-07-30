@@ -10,15 +10,14 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :description %>
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
     <%= form.text_area :description, class: 'form-control' %>
   </div>
 
 
   <div class="field">
-    <%= image_tag form.object.image_url if form.object.cached_image_data %>>
+    <%= image_tag form.object.image_url if form.object.cached_image_data %>
     <%= form.hidden_field :image, value: post.cached_image_data %>
     <%= form.file_field :image, class: 'form-control' %>
   </div>

@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: %i[ index ]
 
   def show
   end
 
   def edit
+  end
+
+  def index
+    @users = User.all
   end
 
   def update

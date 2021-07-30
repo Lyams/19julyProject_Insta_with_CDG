@@ -12,3 +12,14 @@
     <%= link_to "UnFollow", follow_path(following_id: @user.id), method: :delete %>
   <% end %>
 <% end %>
+
+<p> User follower:
+<% @user.followers.each do |flw| %>
+  <br><%= flw.name %>
+  <% end %>
+</p>
+</br>
+<p> User following:
+<% @user.followings.each do |flw| %>
+  <br>  <%= flw.name %>
+<% end %> </p>

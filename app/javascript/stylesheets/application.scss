@@ -1,1 +1,7 @@
-@import "bootstrap"
+@import "bootstrap";
+
+body {
+  background: mintcream; /* Цвет фона */
+  border: 2px solid black;  /* Параметры рамки */
+  padding: 50px; /* Поля вокруг */
+}

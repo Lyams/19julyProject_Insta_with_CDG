@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_user, only: %i[ show edit update destroy index]
+  before_action :set_user, only: %i[ show edit update destroy index create new]
   before_action :set_post, only: %i[ show edit update destroy ]
   #before_action :validate_autorization, only: [:edit, :update, :destroy]
 
