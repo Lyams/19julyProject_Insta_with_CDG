@@ -1,25 +1,37 @@
 <h1>Profile</h1>
-<p> User name:  <%= @user.name %><p>
-<p> User email: <%= @user.email %><p>
-<p> User bio: <%= @user.bio %></p>
-<br>
-<%= link_to "Posts", user_posts_path(@user) %>
 
+<div> User name: <%= @user.name %> | User email: <%= @user.email %> | User bio: <%= @user.bio %> </div>
+<br>
+<%= link_to "Posts of a user", user_posts_path(@user) %>
+<h1>
 <% if current_user.present? && current_user != @user %>
   <%  if Follow.find_by(follower: current_user, following:  @user).blank? %>
-    <%= link_to "Follow", follows_path(following_id: @user.id), method: :post %>
+    <%= link_to  follows_path(following_id: @user.id), method: :post do %>
+        Follow <i class="fas fa-user-friends"></i>
+    <% end %>
   <% else %>
-    <%= link_to "UnFollow", follow_path(following_id: @user.id), method: :delete %>
+    <%= link_to follow_path(following_id: @user.id), method: :delete do %>
+        UnFollow <i class="fas fa-users-slash"></i>
+    <% end %>
   <% end %>
 <% end %>
+</h1>
 
-<p> User follower:
-<% @user.followers.each do |flw| %>
-  <br><%= flw.name %>
-  <% end %>
-</p>
+
+  <div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+      <div class="card-header">User following:</div>
+      <% @user.followings.each do |flw| %>
+         <li class="list-group-item"><%= link_to flw.name, user_path(flw) %></li>
+      <% end %>
+    </ul>
+  </div>
 </br>
-<p> User following:
-<% @user.followings.each do |flw| %>
-  <br>  <%= flw.name %>
-<% end %> </p>
+  <div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+      <div class="card-header">User follower:</div>
+      <% @user.followers.each do |flw| %>
+        <li class="list-group-item"><%= link_to flw.name, user_path(flw) %></li>
+      <% end %>
+    </ul>
+  </div>

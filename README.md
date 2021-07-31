@@ -1,15 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Instagram Like On Rails
 
-Things you may want to cover:
+This is an Instagram clone project. It is made on  Ruby-on-Rails/
 
-* Ruby version
+* Ruby version: 2.7
 
-* System dependencies
+* Rails version: 6.1
 
-* Configuration
+* Make sure you have installed ImageMagick for paperclip
+
+
 
 * Database creation
 

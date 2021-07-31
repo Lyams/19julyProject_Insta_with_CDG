@@ -11,5 +11,5 @@ class User < ApplicationRecord
   has_many :following_follows, foreign_key: :follower_id, class_name: "Follow"
   has_many :followings, through: :following_follows, source: :following
   has_many :likes
-  validates name, presence: true, length: { minimum: 2 }
+  validates :name, presence: true, length: { minimum: 2 }
 end

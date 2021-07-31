@@ -6,38 +6,45 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @post.user.email %>
+  <strong>Autor:</strong>
+  <%= link_to @post.user.name, user_path(@post.user) %>
 </p>
 
 <p>
   <strong>Image data:</strong>
-  <%= image_tag @post.image_url %>
+  <%= image_tag @post.image_url(:big_thumbnail) %>
 </p>
 
   <% for comment in @comments %>
   <p>
-    <strong>Comment:</strong>
-    <%= comment.commentary %>
-    <strong>Autor:</strong>
-    <%= comment.user.email %>
-  </p>
+
+  <div class="card">
+    <div class="card-body">
+      <p><strong><%= link_to comment.user.name, user_path(comment.user) , class:"card-link" %>:   </strong> <%= comment.commentary %><p>
+    </div>
+  </div>
   <% end %>
 
 </br>
 
 <% if user_signed_in? %>
   <% unless Like.find_by(post_id: @post.id, user_id: current_user.id) %>
-   <p>
-    <%= link_to "Like", likes_path(id: @post.id), method: :post %>
-  </p>
+   <h1>
+    <%= link_to likes_path(id: @post.id), method: :post do %>
+       <i class="far fa-thumbs-up"></i> <%= Like.where(post_id: @post.id).count %>
+    <% end %>
+  </h1>
   <% else %>
-    <%= link_to "UnLike", like_path(id: @post.id), method: :delete %>
+    <h1>
+    <%= link_to like_path(id: @post.id), method: :delete do %>
+      <i class="fas fa-thumbs-up"></i><%= Like.where(post_id: @post.id).count %>
+      <% end %>
+    </h1>
   <% end %>
   </br>
     <%= render 'comments_form', comment: @comment %>
 <% else %>
-  <p> For comments and likes need log in </p>
+  <p> For comments and likes need <%= link_to 'Log in', new_user_session_path %> </p>
 <%end %>
 
 

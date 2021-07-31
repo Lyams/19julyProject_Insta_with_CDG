@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+<h1>PhotoPosts</h1>
 <div class="row">
 <% @posts.each do |post| %>
-  <div class="card" style="width: 50rem;">
-    <%= image_tag post.image_url %>
+  <div class="card" style="width: 20rem;">
+    <%= image_tag post.image_url(:thumbnail) %>
     <div class="card-body">
-      <h1 class="card-title">Author: <%= post.user.name %></h1>
-      <h1> Likes: <%= post.likes.count%> </h1>
+      <h1 class="card-title">Author: <%= post.user.name %>
+        | <i class="far fa-thumbs-up"></i> : <%= post.likes.count%> </h1>
       <p> Comments: <%= post.comments.count %> <p>
       <p class="card-text"><%= post.description %></p>
       <%= link_to 'Show', user_post_path(post.user, post), class:"btn btn-outline-secondary" %>
@@ -23,6 +23,7 @@
   </div>
   </br>
 <% end %>
+
 </div>
 <br>
 <% if user_signed_in? %>
