@@ -28,9 +28,9 @@ RSpec.describe Post, type: :model do
     expect(subject).to_not be_valid
   end
 
-  # it 'not image = not valid' do
-  # expect(create(:post_invalid_image)).to be_invalid
-  # end
+  it 'not image = not valid' do
+   expect(build(:post_invalid_image)).to be_invalid
+  end
 
 
 end
