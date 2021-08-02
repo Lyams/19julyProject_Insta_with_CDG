@@ -32,6 +32,7 @@ gem 'image_processing', '~> 1.2'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'database_cleaner-active_record'
   gem 'database_cleaner-redis'
