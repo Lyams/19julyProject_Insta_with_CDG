@@ -23,7 +23,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'update' do
-    let(:new_params) { { id: user.id, user: {bio: 'I am greek', name: 'Plato' } } }
+    let(:new_params) { { id: user.id, user: {bio: 'I am greek', name: 'Plato2' } } }
     subject { process :update, method: :put, params: new_params }
 
     it 'updates users bio' do
@@ -31,7 +31,7 @@ RSpec.describe UsersController, type: :controller do
 
     end
     it 'updates users name' do
-      expect { subject }.to change { user.reload.name }.to('Plato')
+      expect { subject }.to change { user.reload.name }.to('Plato2')
     end
   end
 end
