@@ -5,13 +5,13 @@ FactoryBot.define do
     password { 'password1' }
     name { Faker::GreekPhilosophers.name }
     bio { Faker::Lorem.characters }
-    end
+  end
 
-  factory :second_user do
+  factory :second_user, class: :user do
     email { Faker::Internet.email }
     password_confirmation { 'password2' }
     password { 'password2' }
-    name { Faker::GreekPhilosophers.name }
-    bio { Faker::Lorem.characters }
+    name { Faker::Name.name_with_middle }
+    bio { Faker::Hipster.sentence }
   end
 end
