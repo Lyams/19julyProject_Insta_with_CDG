@@ -32,8 +32,10 @@ gem 'image_processing', '~> 1.2'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
+  gem 'rails-controller-testing'
+  gem 'shoulda-matchers', '~> 5.0'
   gem 'database_cleaner-active_record'
-  gem 'database_cleaner-redis'
+  #gem 'database_cleaner-redis'
   gem 'faker', '~> 2.18'
   gem 'factory_bot_rails', '~> 6.2'
   #Run Selenium tests more easily with install and updates for all supported webdrivers.

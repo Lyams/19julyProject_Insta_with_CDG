@@ -31,7 +31,7 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-    @post.user = @user
+    @post.user = current_user
     respond_to do |format|
       if @post.save
         format.html { redirect_to user_post_path(@user, @post), notice: "Post was successfully created." }
@@ -60,7 +60,7 @@ class PostsController < ApplicationController
     authorize @post
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+      format.html { redirect_to user_posts_path, notice: "Post was successfully destroyed." }
     end
   end
 

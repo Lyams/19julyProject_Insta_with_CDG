@@ -3,6 +3,6 @@ class Post < ApplicationRecord
   has_many :comments,  dependent: :destroy
   belongs_to :user
   has_many :likes
-  validates :description, presence: true
+  validates :description, presence: true, length: {minimum: 2}
   validates :image_data, presence: true
 end
