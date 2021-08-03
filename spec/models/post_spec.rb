@@ -32,5 +32,4 @@ RSpec.describe Post, type: :model do
    expect(build(:post_invalid_image)).to be_invalid
   end
 
-
 end
