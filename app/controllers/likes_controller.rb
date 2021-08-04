@@ -1,7 +1,9 @@
 class LikesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     post = Post.find(params[:id])
-    Like.create(user_id: current_user.id, post_id: post.id)
+    Like.create(user_id: current_user.id, post_id: post.id) if Like.where(user_id: current_user.id, post_id: post.id).blank?
     redirect_back(fallback_location: user_posts_path(post))
   end
 

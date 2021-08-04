@@ -20,21 +20,6 @@
 <% end %>
 </h1>
 
-
-  <div class="card" style="width: 18rem;">
-    <ul class="list-group list-group-flush">
-      <div class="card-header">User following:</div>
-      <% @user.followings.each do |flw| %>
-         <li class="list-group-item"><%= link_to flw.name, user_path(flw) %></li>
-      <% end %>
-    </ul>
-  </div>
 </br>
-  <div class="card" style="width: 18rem;">
-    <ul class="list-group list-group-flush">
-      <div class="card-header">User follower:</div>
-      <% @user.followers.each do |flw| %>
-        <li class="list-group-item"><%= link_to flw.name, user_path(flw) %></li>
-      <% end %>
-    </ul>
-  </div>
+<%= render template: 'followers/index', action: :index,  user: @user %>
+<%= render template: 'followings/index', action: 'folowings#index', user: @user %>

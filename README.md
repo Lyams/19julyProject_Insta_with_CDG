@@ -1,3 +1,6 @@
+траблы:
+- контроллеры follower и folllowing не сипользуются нигде
+
 # README
 
 Instagram Like On Rails
