@@ -1,8 +1,10 @@
 <h1> Followers </h1>
 
-<ul>
-  <% @followers.each do |follower| %>
-  <li>
-    <%= link_to follower.email, user_path(follower) %>
-  </li>
-  <% end %>
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <div class="card-header">User follower:</div>
+    <% @user.followers.each do |flw| %>
+      <li class="list-group-item"><%= link_to flw.name, user_path(flw) %></li>
+    <% end %>
+  </ul>
+</div>
