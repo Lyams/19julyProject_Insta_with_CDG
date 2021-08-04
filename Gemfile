@@ -41,6 +41,7 @@ group :development, :test do
   #Run Selenium tests more easily with install and updates for all supported webdrivers.
   gem 'webdrivers', '~> 4.6'
   #Capybara helps you test web applications by simulating how a real user would interact with your app
+  gem 'selenium-webdriver'
   gem 'capybara', '~> 3.35', '>= 3.35.3'
   # BDD for Ruby-On-Rails
   gem 'rspec-rails', '~> 5.0', '>= 5.0.1'
