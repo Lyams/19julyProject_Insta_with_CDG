@@ -17,7 +17,6 @@ RSpec.describe FeedPostsController, type: :controller do
         subject
         expect(assigns(:posts)).to eq([post])
       end
-
     end
   end
 
@@ -26,6 +25,7 @@ RSpec.describe FeedPostsController, type: :controller do
 
     describe '#index' do
       it { is_expected.to render_template(nil) }
+      it { is_expected.to redirect_to  new_user_session_path }
       it 'do not assigns @posts' do
         subject
         expect(assigns(:posts)).to eq(nil)
