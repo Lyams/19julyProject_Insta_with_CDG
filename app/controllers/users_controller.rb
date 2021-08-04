@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, except: %i[ index ]
 
   def show
+    @followers = @user.followers
+    @followings = @user.followings
   end
 
   def edit
