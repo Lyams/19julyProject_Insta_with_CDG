@@ -105,13 +105,13 @@ RSpec.describe PostsController, type: :controller do
 
     describe '#new' do
       subject { get :new, params: params}
-      it { is_expected.to redirect_to  new_user_session_path}
+      it { is_expected.to redirect_to  new_user_session_path }
     end
 
     describe '#destroy' do
-      let!(:post) {create :post, user: user}
-      let(:params) { { id: post, user_id: user} }
-      subject { process :destroy, method: :delete, params: params}
+      let!(:post) { create :post, user: user }
+      let(:params) { { id: post, user_id: user } }
+      subject { process :destroy, method: :delete, params: params }
 
       it 'destroys record' do
         expect {subject}.to change {Post.count}.by(0)
@@ -120,22 +120,22 @@ RSpec.describe PostsController, type: :controller do
     end
 
     describe '#edit' do
-      let!(:post) {create :post, user: user}
-      let(:params) { { id: post, user_id: user} }
-      subject { process :edit, method: :get, params: params}
+      let!(:post) { create :post, user: user }
+      let(:params) { { id: post, user_id: user } }
+      subject { process :edit, method: :get, params: params }
 
       it { is_expected.to redirect_to  new_user_session_path }
     end
 
     describe '#update' do
-      let!(:post) {create :post, user: user}
+      let!(:post) { create :post, user: user }
       let(:params) { { id: post, user_id: user, post: { description: 'New decription! ;)'} } }
       subject { process :update, method: :put, params: params }
 
       it { is_expected.to redirect_to  new_user_session_path}
       it 'updates post' do
-        expect { subject }.to change {Post.count}.by(0)
-        expect { subject }.not_to change { post.reload.description}
+        expect { subject }.to change { Post.count }.by(0)
+        expect { subject }.not_to change { post.reload.description }
       end
     end
 
@@ -157,10 +157,10 @@ RSpec.describe PostsController, type: :controller do
         subject
         expect(assigns(:post)).to eq(post)
       end
-      it { is_expected.to render_template(:show)}
+      it { is_expected.to render_template(:show) }
       context 'post without user data' do
         let(:params) { { user_id: nil, id: post} }
-        it { expect {subject}.to raise_error ActionController::UrlGenerationError}
+        it { expect {subject}.to raise_error ActionController::UrlGenerationError }
       end
     end
 
