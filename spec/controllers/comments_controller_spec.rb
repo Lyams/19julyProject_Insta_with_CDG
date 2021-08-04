@@ -18,6 +18,7 @@ RSpec.describe CommentsController, type: :controller do
       end
     end
   end
+
   context "sign out user" do
     before { sign_out user2 }
 
