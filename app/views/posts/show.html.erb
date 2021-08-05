@@ -12,10 +12,10 @@
 
 <p>
   <strong>Image data:</strong>
-  <%= image_tag @post.image_url(:big_thumbnail) %>
+  <%= link_to (image_tag @post.image_url(:big_thumbnail)), (@post.image_url), class:"card-link" %>
 </p>
 
-  <% for comment in @comments %>
+  <% @comments.each do |comment| %>
   <p>
 
   <div class="card">
@@ -46,7 +46,6 @@
 <% else %>
   <p> For comments and likes need <%= link_to 'Log in', new_user_session_path %> </p>
 <%end %>
-
 
 
 <%= link_to 'Edit', edit_user_post_path(@user, @post) %> |

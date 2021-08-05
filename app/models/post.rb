@@ -5,4 +5,9 @@ class Post < ApplicationRecord
   has_many :likes
   validates :description, presence: true, length: {minimum: 2}
   validates :image_data, presence: true
+  before_save do
+    if valid?
+      image_derivatives!
+    end
+  end
 end
