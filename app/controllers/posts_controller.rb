@@ -72,14 +72,14 @@ class PostsController < ApplicationController
     @user = User.find(params[:user_id])
   end
 
-    def validate_autorization
-      if current_user == @post.user
-        #TODO: message and work for changed of post
-        true
-      else
-        redirect_back(fallback_location: root_path, notice: "Post cannot be changed by non-author ")
-      end
-    end
+    # def validate_autorization
+    #   if current_user == @post.user
+    #     #message and work for changed of post
+    #     true
+    #   else
+    #     redirect_back(fallback_location: root_path, notice: "Post cannot be changed by non-author ")
+    #   end
+    # end
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:description, :image, :user_id)
