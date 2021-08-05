@@ -8,7 +8,7 @@
 <%= link_to "Posts of a user", user_posts_path(@user) %>
 <h1>
 <% if current_user.present? && current_user != @user %>
-  <%  if Follow.find_by(follower: current_user, following:  @user).blank? %>
+  <%  unless has_following?(current_user, @user) %>
     <%= link_to  follows_path(following_id: @user.id), method: :post do %>
         Follow <i class="fas fa-user-friends"></i>
     <% end %>

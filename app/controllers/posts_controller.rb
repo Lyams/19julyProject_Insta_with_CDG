@@ -1,10 +1,8 @@
 class PostsController < ApplicationController
-
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!, except: %i[show index]
   before_action :set_user, only: %i[ show edit update destroy index create new]
   before_action :set_post, only: %i[ show edit update destroy ]
   #before_action :validate_autorization, only: [:edit, :update, :destroy]
-
 
   # GET /posts or /posts.json
   def index
@@ -74,14 +72,14 @@ class PostsController < ApplicationController
     @user = User.find(params[:user_id])
   end
 
-    def validate_autorization
-      if current_user == @post.user
-        #TODO: message and work for changed of post
-        true
-      else
-        redirect_back(fallback_location: root_path, notice: "Post cannot be changed by non-author ")
-      end
-    end
+    # def validate_autorization
+    #   if current_user == @post.user
+    #     #message and work for changed of post
+    #     true
+    #   else
+    #     redirect_back(fallback_location: root_path, notice: "Post cannot be changed by non-author ")
+    #   end
+    # end
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:description, :image, :user_id)
