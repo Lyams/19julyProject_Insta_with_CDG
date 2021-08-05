@@ -20,6 +20,6 @@
 <% end %>
 </h1>
 
-</br>
+<br>
 <%= render template: 'followers/index', action: :index,  user: @user %>
-<%= render template: 'followings/index', action: 'folowings#index', user: @user %>
+<%= render template: 'followings/index', action: :index, user: @user %>
