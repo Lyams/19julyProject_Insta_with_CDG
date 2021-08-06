@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   has_many :following_follows, foreign_key: :follower_id, class_name: "Follow"
   has_many :followings, through: :following_follows, source: :following
-  has_many :likes
+  has_many :likes, dependent: :destroy
   validates :name, presence: true, length: { minimum: 2 }
   validates :bio, length: { minimum: 2 }
   validates :email, presence: true, length: { minimum: 5 }, uniqueness: true

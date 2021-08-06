@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   let(:user) { create(:user) }
   let(:params) { { id: user.id, bio: user.bio, name: user.name } }
-
   describe 'index' do
     subject { get :index, params: params }
     it 'assigns @users' do
@@ -23,15 +22,38 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'update' do
-    let(:new_params) { { id: user.id, user: {bio: 'I am greek', name: 'Plato2' } } }
-    subject { process :update, method: :put, params: new_params }
+    context 'log in authorize user' do
+      before {sign_in user}
+      let(:params) { { id: user.id, user: {bio: 'I am greek', name: 'Plato2' } } }
+      subject { process :update, method: :put, params: params }
 
-    it 'updates users bio' do
-      expect { subject }.to change { user.reload.bio }.to('I am greek')
-
+      it 'updates users bio' do
+        expect { subject }.to change { user.reload.bio }.to('I am greek')
+      end
+      it 'updates users name' do
+        expect { subject }.to change { user.reload.name }.to('Plato2')
+      end
+      it 'permit' do
+        should permit(:bio, :name).for(:update, params: params).on(:user)
+      end
     end
-    it 'updates users name' do
-      expect { subject }.to change { user.reload.name }.to('Plato2')
+
+    context 'log in other user' do
+      before { sign_out user }
+      let(:other_user) { create(:second_user) }
+      before { sign_in other_user }
+      let(:params) { { id: user.id, user: {bio: 'I am greek', name: 'Plato2' } } }
+      subject { process :update, method: :put, params: params }
+
+      it 'updates users bio' do
+        expect { subject }.to_not change { user.reload.bio }
+      end
+      it 'updates users name' do
+        expect { subject }.to_not change { user.reload.name }
+      end
+      it 'permit' do
+        should permit(:bio, :name).for(:update, params: params).on(:user)
+      end
     end
   end
 end

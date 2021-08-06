@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, except: %i[ index ]
+  before_action :authenticate_user!, except: %i[show index]
 
   def show
     @followers = @user.followers
@@ -14,6 +15,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = current_user
     if @user.update(user_update_params)
       redirect_to user_path(@user)
     else

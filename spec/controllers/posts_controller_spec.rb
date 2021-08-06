@@ -50,6 +50,10 @@ RSpec.describe PostsController, type: :controller do
         is_expected.to redirect_to user_post_path(assigns(:user), assigns(:post ))
       end
 
+      it 'permit' do
+        should permit(:description, :image, :user_id).for(:create, params: params).on(:post)
+      end
+
       context 'when params invalid' do
         let(:params) { { user_id: user.id, post: { description: nil}} }
         it { is_expected.to render_template :new }
@@ -77,6 +81,20 @@ RSpec.describe PostsController, type: :controller do
       it 'destroys record' do
         expect {subject}.to change {Post.count}.by(-1)
         is_expected.to redirect_to(user_posts_path(assigns :user))
+      end
+
+      context 'Deleting a post removes the like too' do
+        let!(:like) {create :like, user: user, post: post}
+        it 'destroy like' do
+        expect {subject}.to change {Like.count}.by(-1)
+        end
+      end
+
+      context 'Deleting a post removes the comments too' do
+        let!(:comment) {create :comment, user: user, post: post}
+        it 'destroy commentary' do
+          expect {subject}.to change {Comment.count}.by(-1)
+        end
       end
     end
 
@@ -114,7 +132,7 @@ RSpec.describe PostsController, type: :controller do
       subject { process :destroy, method: :delete, params: params }
 
       it 'destroys record' do
-        expect {subject}.to change {Post.count}.by(0)
+        expect {subject}.not_to change {Post.count}
         is_expected.to redirect_to  new_user_session_path
       end
     end
@@ -134,7 +152,7 @@ RSpec.describe PostsController, type: :controller do
 
       it { is_expected.to redirect_to  new_user_session_path}
       it 'updates post' do
-        expect { subject }.to change { Post.count }.by(0)
+        expect { subject }.not_to change { Post.count }
         expect { subject }.not_to change { post.reload.description }
       end
     end

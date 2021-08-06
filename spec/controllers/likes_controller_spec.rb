@@ -46,7 +46,7 @@ RSpec.describe LikesController, type: :controller do
     before { sign_out user2 }
     describe '#create' do
       it 'do not create like' do
-        expect {subject}.to change {Like.count}.by(0)
+        expect {subject}.not_to change {Like.count}
       end
       it { is_expected.to redirect_to  new_user_session_path }
     end
@@ -54,7 +54,7 @@ RSpec.describe LikesController, type: :controller do
       let!(:like) { create( :like, user_id: user2.id, post_id: post.id) }
       subject { process :destroy, method: :delete, params: params }
       it 'do not destroy like' do
-        expect {subject}.to change {Like.count}.by(0)
+        expect {subject}.not_to change {Like.count}
       end
       it { is_expected.to redirect_to  new_user_session_path }
     end
