@@ -7,6 +7,8 @@ RSpec.describe Like, type: :model do
   it { should respond_to(:post_id) }
   it { is_expected.to belong_to :user }
   it { is_expected.to belong_to :post }
+  it { is_expected.to be_valid }
+
   it "user should be present" do
     subject.user = nil
     is_expected.to_not be_valid

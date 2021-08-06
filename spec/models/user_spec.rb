@@ -6,9 +6,9 @@ RSpec.describe User, type: :model do
   it { should respond_to(:bio) }
   it { should respond_to(:name) }
   it { should respond_to(:encrypted_password) }
-  it { is_expected.to have_many :posts }
-  it { is_expected.to have_many :likes }
-  it { is_expected.to have_many :comments }
+  it { is_expected.to have_many(:posts) }
+  it { is_expected.to have_many(:likes).dependent(:destroy) }
+  it { is_expected.to have_many(:comments) }
   it { is_expected.to have_many(:follower_follows).with_foreign_key(:following_id).class_name("Follow") }
   it { is_expected.to have_many(:following_follows).with_foreign_key(:follower_id).class_name("Follow") }
   it { is_expected.to have_many(:followings).through(:following_follows).source(:following) }
