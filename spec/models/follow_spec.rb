@@ -15,4 +15,8 @@ RSpec.describe Follow, type: :model do
     subject.following_id = nil
     is_expected.to_not be_valid
   end
+  it 'follow only once' do
+    subject
+    is_expected.to_not be_valid
+  end
 end

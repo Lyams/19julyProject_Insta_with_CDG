@@ -23,15 +23,17 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'update' do
-    let(:new_params) { { id: user.id, user: {bio: 'I am greek', name: 'Plato2' } } }
-    subject { process :update, method: :put, params: new_params }
+    let(:params) { { id: user.id, user: {bio: 'I am greek', name: 'Plato2' } } }
+    subject { process :update, method: :put, params: params }
 
     it 'updates users bio' do
       expect { subject }.to change { user.reload.bio }.to('I am greek')
-
     end
     it 'updates users name' do
       expect { subject }.to change { user.reload.name }.to('Plato2')
+    end
+    it 'permit' do
+      should permit(:bio, :name).for(:update, params: params).on(:user)
     end
   end
 end

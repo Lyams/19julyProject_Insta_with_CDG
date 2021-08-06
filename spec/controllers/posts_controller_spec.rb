@@ -50,6 +50,10 @@ RSpec.describe PostsController, type: :controller do
         is_expected.to redirect_to user_post_path(assigns(:user), assigns(:post ))
       end
 
+      it 'permit' do
+        should permit(:description, :image, :user_id).for(:create, params: params).on(:post)
+      end
+
       context 'when params invalid' do
         let(:params) { { user_id: user.id, post: { description: nil}} }
         it { is_expected.to render_template :new }
