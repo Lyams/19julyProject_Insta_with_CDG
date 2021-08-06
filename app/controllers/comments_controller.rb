@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   def create
     comment = Comment.new(comment_params)
-    #comment.user_id = current_user.id
+    comment.user = current_user
     comment.save
     redirect_to user_post_path(id: comment.post.id, user_id: comment.post.user.id )
     #redirect_back(fallback_location: user_posts_path(comment_params[:user_id]))

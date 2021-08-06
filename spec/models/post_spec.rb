@@ -4,6 +4,7 @@ RSpec.describe Post, type: :model do
   subject { build(:post) }
 
   it { should respond_to(:description) }
+  it { should respond_to(:image_data) }
   it { is_expected.to belong_to :user }
   it { is_expected.to validate_presence_of(:description) }
   it { is_expected.to validate_length_of(:description).is_at_least(2) }

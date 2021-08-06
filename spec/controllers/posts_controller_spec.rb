@@ -118,7 +118,7 @@ RSpec.describe PostsController, type: :controller do
       subject { process :destroy, method: :delete, params: params }
 
       it 'destroys record' do
-        expect {subject}.to change {Post.count}.by(0)
+        expect {subject}.not_to change {Post.count}
         is_expected.to redirect_to  new_user_session_path
       end
     end
@@ -138,7 +138,7 @@ RSpec.describe PostsController, type: :controller do
 
       it { is_expected.to redirect_to  new_user_session_path}
       it 'updates post' do
-        expect { subject }.to change { Post.count }.by(0)
+        expect { subject }.not_to change { Post.count }
         expect { subject }.not_to change { post.reload.description }
       end
     end
