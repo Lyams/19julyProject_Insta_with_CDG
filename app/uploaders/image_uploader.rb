@@ -1,16 +1,17 @@
 require "image_processing/mini_magick"
 
 class ImageUploader < Shrine
-  #plugin :default_url
+  plugin :default_url
   #plugin :processing
   #plugin :versions
   plugin :validation
   plugin :validation_helpers
   plugin :derivatives
+  plugin :determine_mime_type
 
   Attacher.validate do
-    validate_extension %w[jpeg jpg jpe jfif png webp gif tiff bmp svg]
-    validate_mime_type %w[image/jpeg image/png image/webp image/gif image/pjpeg image/svg+xml image/tiff]
+    validate_extension %w[ jpeg jpg jpe jfif png webp gif tiff bmp ]
+    validate_mime_type %w[ image/jpeg image/png image/webp image/gif image/pjpeg image/svg+xml image/tiff ]
     validate_max_size 10.megabyte, message: 'The file is too large. Maximum size is 10 Mb'
   end
 
@@ -37,7 +38,7 @@ class ImageUploader < Shrine
     end
 =end
 
-  #Attacher.default_url do |**options|
-  #    'public/no_image_available.svg'
-  #  end
+ Attacher.default_url do |**options|
+     'no_image_available.jpeg'
+   end
 end
