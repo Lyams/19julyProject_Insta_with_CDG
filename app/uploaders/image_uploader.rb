@@ -7,6 +7,7 @@ class ImageUploader < Shrine
   plugin :validation
   plugin :validation_helpers
   plugin :derivatives
+  plugin :determine_mime_type
 
   Attacher.validate do
     validate_extension %w[ jpeg jpg jpe jfif png webp gif tiff bmp ]
