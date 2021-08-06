@@ -82,6 +82,20 @@ RSpec.describe PostsController, type: :controller do
         expect {subject}.to change {Post.count}.by(-1)
         is_expected.to redirect_to(user_posts_path(assigns :user))
       end
+
+      context 'Deleting a post removes the like too' do
+        let!(:like) {create :like, user: user, post: post}
+        it 'destroy like' do
+        expect {subject}.to change {Like.count}.by(-1)
+        end
+      end
+
+      context 'Deleting a post removes the comments too' do
+        let!(:comment) {create :comment, user: user, post: post}
+        it 'destroy commentary' do
+          expect {subject}.to change {Comment.count}.by(-1)
+        end
+      end
     end
 
     describe '#update' do
