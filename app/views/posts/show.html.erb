@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Description:</strong>
   <%= @post.description %>
@@ -28,21 +26,9 @@
 </br>
 
 <% if user_signed_in? %>
-  <% unless Like.find_by(post_id: @post.id, user_id: current_user.id) %>
-   <h1>
-    <%= link_to likes_path(id: @post.id), method: :post do %>
-       <i class="far fa-thumbs-up"></i> <%= Like.where(post_id: @post.id).count %>
-    <% end %>
-  </h1>
-  <% else %>
-    <h1>
-    <%= link_to like_path(id: @post.id), method: :delete do %>
-      <i class="fas fa-thumbs-up"></i><%= Like.where(post_id: @post.id).count %>
-      <% end %>
-    </h1>
-  <% end %>
-  </br>
-    <%= render 'comments_form', comment: @comment %>
+  <%= render 'likes/likes_form', post: @post %>
+</br>
+  <%= render 'comments/comments_form', comment: @comment %>
 <% else %>
   <p> For comments and likes need <%= link_to 'Log in', new_user_session_path %> </p>
 <%end %>

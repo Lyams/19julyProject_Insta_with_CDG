@@ -16,9 +16,14 @@
   <main class="flex-shrink-0">
   </br>
   <%= render 'layouts/header' %>
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <div class="notice text-center">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">
+      <%= notice %>
+    </span>
+  </div>
+  <div class="alert text-center">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';"><%= alert %></span>
+  </div>
   <div class="container">
     <%= yield %>
   </div>

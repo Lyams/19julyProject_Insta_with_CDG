@@ -1,15 +1,18 @@
-<p id="notice"><%= notice %></p>
-
-<h1>PhotoPosts</h1>
+<h1><%= @kind %></h1>
 <div class="row">
 <% @posts.each do |post| %>
   <div class="card" style="width: 20rem;">
-    <%= image_tag post.image_url(:thumbnail) %>
     <div class="card-body">
-      <h1 class="card-title">Author: <%= post.user.name %>
-        | <i class="far fa-thumbs-up"></i> : <%= post.likes.count%> </h1>
-      <p> Comments: <%= post.comments.count %> <p>
+      <%= link_to (image_tag post.image_url(:thumbnail)), user_post_path(post.user, post), class:"card-img-top" %>
+      <h4 class="card-title">Author: <%= link_to post.user.name, user_path(post.user)%> </h4>
+      <% if user_signed_in? %>
+        <%= render 'likes/likes_form', post: post %>
+        <%else %>
+        | <i class="far fa-thumbs-up"></i> : <%= post.likes.count%>
+        <% end %>
+      <p class="card-text"> Comments: <%= post.comments.count %> <p>
       <p class="card-text"><%= post.description %></p>
+      <div class="card-bottom">
       <%= link_to 'Show', user_post_path(post.user, post), class:"btn btn-outline-secondary" %>
       <% if user_signed_in? %>
         <% if policy(post).update? %>
@@ -19,9 +22,9 @@
           <%= link_to 'Destroy', user_post_path(post.user, post), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger" %>
         <% end %>
       <% end %>
+      </div>
     </div>
   </div>
-  </br>
 <% end %>
 
 </div>

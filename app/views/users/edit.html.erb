@@ -1,10 +1,10 @@
 <%= form_with(model: @user, local: true) do |form| %>
 
-  <div class="mb-3">
+  <div class="sm-3">
     <%= form.label :name, class: "form-label" %>
     <%= form.text_area :name, minlength: 2, class: 'form-control' %>
   </div>
-  <div class="mb-3">
+  <div class="sm-3">
     <%= form.label :bio, class: "form-label" %>
     <%= form.text_area :bio, minlength: 2, class: 'form-control' %>
   </div>
