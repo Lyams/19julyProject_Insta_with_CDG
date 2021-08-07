@@ -4,12 +4,11 @@
 </p>
 
 <p>
-  <strong>Autor:</strong>
+  <strong>Author:</strong>
   <%= link_to @post.user.name, user_path(@post.user) %>
 </p>
 
 <p>
-  <strong>Image data:</strong>
   <%= link_to (image_tag @post.image_url(:big_thumbnail)), (@post.image_url), class:"card-link", target: :_blank %>
 </p>
 
