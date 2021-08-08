@@ -33,5 +33,5 @@
 <%end %>
 
 
-<%= link_to 'Edit', edit_user_post_path(@user, @post) %> |
-<%= link_to 'Back', user_posts_path(@user) %>
+<%= link_to 'Edit', edit_user_post_path(@user, @post), class:'btn btn-warning' if user_signed_in? && policy(@post).update?%>
+<%= link_to 'Back', user_posts_path(@user), class:'btn btn-info' %>

@@ -39,6 +39,6 @@ class ImageUploader < Shrine
 =end
 
  Attacher.default_url do |**options|
-     'no_image_available.jpeg'
+     'placeholders/no_image_available.jpeg'
    end
 end

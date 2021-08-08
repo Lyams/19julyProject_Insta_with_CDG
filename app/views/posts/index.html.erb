@@ -1,7 +1,7 @@
 <h1><%= @kind %></h1>
 <div class="row">
 <% @posts.each do |post| %>
-  <div class="card" style="width: 20rem;">
+  <div class="card" style="width: 23rem;">
     <div class="card-body">
       <%= link_to (image_tag post.image_url(:thumbnail)), user_post_path(post.user, post), class:"card-img-top" %>
       <h4 class="card-title">Author: <%= link_to post.user.name, user_path(post.user)%> </h4>
