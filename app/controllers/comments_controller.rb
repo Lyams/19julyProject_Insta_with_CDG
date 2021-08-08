@@ -3,7 +3,8 @@ class CommentsController < ApplicationController
 
   def create
     comment = Comment.new(comment_params)
-    comment.user = current_user
+    #comment.user = current_user
+    authorize comment
     comment.save
     redirect_to user_post_path(id: comment.post.id, user_id: comment.post.user.id ), notice: "The comment was created successfully"
   end
