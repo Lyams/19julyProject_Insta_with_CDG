@@ -1,9 +1,8 @@
-<h1> Followings </h1>
-  <div class="card" style="width: 18rem;">
-    <ul class="list-group list-group-flush">
-      <div class="card-header">User following:</div>
-      <% @followings.each do |flw| %>
+<div class="card-sm">
+  <ul class="list-group list-group-flush">
+    <div class="card-header">User following:</div>
+    <% @followings.each do |flw| %>
       <li class="list-group-item"><%= link_to flw.name, user_path(flw) %></li>
-      <% end %>
-    </ul>
-  </div>
+    <% end %>
+  </ul>
+</div>

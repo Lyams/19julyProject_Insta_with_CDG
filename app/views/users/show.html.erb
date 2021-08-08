@@ -1,25 +1,46 @@
 <h1>Profile</h1>
 
-<div> User name: <%= @user.name %> | User email: <%= @user.email %> | User bio: <%= @user.bio %> </div>
-<% if current_user.present? && current_user == @user %>
-  <%= link_to 'Edit profile', edit_user_path(current_user),class:"btn btn-outline-secondary"  %>
-<% end %>
+<div class="container">
+  <div class="row text-sm-left">
+    <div class="row-sm">User name: <strong><%= @user.name %></strong></div>
+    <div class="row-sm">User email: <strong><%= @user.email %></strong></div>
+    <div class="row-sm">User bio: <strong><em><%= @user.bio %></em></strong> </div>
+  </div>
+</div>
 <br>
-<%= link_to "Posts of a user", user_posts_path(@user) %>
-<h1>
-<% if current_user.present? && current_user != @user %>
-  <%  unless has_following?(current_user, @user) %>
-    <%= link_to  follows_path(following_id: @user.id), method: :post do %>
-        Follow <i class="fas fa-user-friends"></i>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <%= link_to "All Posts of a user", user_posts_path(@user), class: "btn btn-outline-primary" %>
+    </div>
+    <% if current_user.present? && policy(@user).update? %>
+      <div class="col-sm">
+        <%= link_to 'Edit profile', edit_user_path(current_user), class: "btn btn-outline-secondary" %>
+      </div>
     <% end %>
-  <% else %>
-    <%= link_to follow_path(following_id: @user.id), method: :delete do %>
-        UnFollow <i class="fas fa-users-slash"></i>
-    <% end %>
-  <% end %>
-<% end %>
-</h1>
-
+    <div class="col-sm">
+      <%  if current_user.present? && current_user != @user %>
+      <% unless has_following?(current_user, @user) %>
+        <%= link_to follows_path(following_id: @user.id), class: "btn btn-outline-info", method: :post do %>
+          Follow <i class="fas fa-user-friends"></i>
+        <% end %>
+      <% else %>
+        <%= link_to follow_path(following_id: @user.id), class: "btn btn-outline-info", method: :delete do %>
+          UnFollow <i class="fas fa-users-slash"></i>
+        <% end %>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
 <br>
-<%= render template: 'followers/index', action: :index,  user: @user %>
-<%= render template: 'followings/index', action: :index, user: @user %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <%= render template: 'followers/index', action: :index, user: @user %>
+    </div>
+    <div class="col-sm">
+      <%= render template: 'followings/index', action: :index, user: @user %>
+    </div>
+  </div>
+</div>

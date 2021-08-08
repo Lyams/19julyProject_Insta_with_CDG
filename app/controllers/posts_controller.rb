@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     @posts = @user.posts
+    @kind = "Posts of #{@user.name}"
   end
 
   # GET /posts/1 or /posts/1.json
@@ -32,7 +33,7 @@ class PostsController < ApplicationController
     @post.user = current_user
     respond_to do |format|
       if @post.save
-        format.html { redirect_to user_post_path(@user, @post), notice: "Post was successfully created." }
+        format.html { redirect_to user_post_path(current_user, @post), notice: "Post was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end

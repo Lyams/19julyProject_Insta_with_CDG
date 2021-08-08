@@ -86,7 +86,7 @@ RSpec.describe PostsController, type: :controller do
       context 'Deleting a post removes the like too' do
         let!(:like) {create :like, user: user, post: post}
         it 'destroy like' do
-        expect {subject}.to change {Like.count}.by(-1)
+          expect {subject}.to change {Like.count}.by(-1)
         end
       end
 
@@ -182,5 +182,43 @@ RSpec.describe PostsController, type: :controller do
       end
     end
 
+  end
+
+  context 'log in other user' do
+    let(:other_user) { create(:second_user) }
+    before { sign_out user }
+    before { sign_in other_user }
+
+    describe '#create' do
+      let!(:params) { {post: attributes_for(:post), user_id: user.id} }
+      subject { post :create, params: params }
+
+      it 'create post' do
+        expect {subject}.to change {Post.where(user: other_user).count}.by(1)
+        expect {subject}.not_to change {Post.where(user: user).count}
+        is_expected.to redirect_to user_post_path(other_user, assigns(:post ))
+      end
+    end
+    describe '#update' do
+      let!(:post) {create :post, user: user}
+      let(:params) { { id: post, user_id: user, post: { description: 'New decription! ;)'} } }
+      subject { process :update, method: :put, params: params }
+
+      it { is_expected.to redirect_to root_path}
+      it 'updates post' do
+        expect { subject }.not_to change { post.reload.description }
+      end
+    end
+
+    describe '#destroy' do
+      let!(:post) {create :post, user: user}
+      let(:params) { { id: post, user_id: user} }
+      subject { process :destroy, method: :delete, params: params}
+
+      it 'does not destroy record' do
+        expect {subject}.not_to change {Post.count}
+        is_expected.to redirect_to root_path
+      end
+    end
   end
 end

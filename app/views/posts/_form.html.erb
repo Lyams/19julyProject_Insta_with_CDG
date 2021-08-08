@@ -19,7 +19,7 @@
   <div class="field">
     <%= image_tag form.object.image_url if form.object.cached_image_data %>
     <%= form.hidden_field :image, value: post.cached_image_data %>
-    <%= form.file_field :image, class: 'form-control' %>
+    <%= form.file_field :image, class: 'form-file-input' %>
   </div>
 
   <div class="actions">
