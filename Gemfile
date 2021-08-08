@@ -27,27 +27,32 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
-  gem 'spring'
+gem 'spring'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
-  gem 'rails-controller-testing'
-  gem 'shoulda-matchers', '~> 5.0'
-  gem 'database_cleaner-active_record'
   #gem 'database_cleaner-redis'
   gem 'faker', '~> 2.18'
-  gem 'factory_bot_rails', '~> 6.2'
-  #Run Selenium tests more easily with install and updates for all supported webdrivers.
-  gem 'webdrivers', '~> 4.6'
-  #Capybara helps you test web applications by simulating how a real user would interact with your app
-  gem 'selenium-webdriver'
-  gem 'capybara', '~> 3.35', '>= 3.35.3'
-  # BDD for Ruby-On-Rails
+
+
   gem 'rspec-rails', '~> 5.0', '>= 5.0.1'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
+group :test do
+  gem 'capybara', '~> 3.35', '>= 3.35.3'
+  # BDD for Ruby-On-Rails
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails', '~> 6.2'
+  gem 'shoulda-matchers', '~> 5.0'
+  gem 'database_cleaner-active_record'
+  #Run Selenium tests more easily with install and updates for all supported webdrivers.
+  gem 'webdrivers', '~> 4.6'
+  #Capybara helps you test web applications by simulating how a real user would interact with your app
+  gem 'selenium-webdriver'
+end
+
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
