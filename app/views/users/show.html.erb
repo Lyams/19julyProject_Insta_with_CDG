@@ -13,7 +13,7 @@
     <div class="col-sm">
       <%= link_to "All Posts of a user", user_posts_path(@user), class: "btn btn-outline-primary" %>
     </div>
-    <% if current_user.present? && current_user == @user %>
+    <% if current_user.present? && policy(@user).update? %>
       <div class="col-sm">
         <%= link_to 'Edit profile', edit_user_path(current_user), class: "btn btn-outline-secondary" %>
       </div>

@@ -36,24 +36,25 @@ RSpec.describe UsersController, type: :controller do
       it 'permit' do
         should permit(:bio, :name).for(:update, params: params).on(:user)
       end
+      it 'assigns server policy' do
+        subject
+        expect(assigns :user).to eq user
+      end
     end
 
     context 'log in other user' do
-      before { sign_out user }
       let(:other_user) { create(:second_user) }
+      before { sign_out user }
       before { sign_in other_user }
       let(:params) { { id: user.id, user: {bio: 'I am greek', name: 'Plato2' } } }
       subject { process :update, method: :put, params: params }
-
       it 'updates users bio' do
-        expect { subject }.to_not change { user.reload.bio }
+         expect { subject }.to_not change { user.reload.bio }
       end
       it 'updates users name' do
         expect { subject }.to_not change { user.reload.name }
       end
-      it 'permit' do
-        should permit(:bio, :name).for(:update, params: params).on(:user)
-      end
+      it { is_expected.to redirect_to root_path}
     end
   end
 end
