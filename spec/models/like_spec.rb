@@ -9,13 +9,12 @@ RSpec.describe Like, type: :model do
   it { is_expected.to belong_to :post }
   it { is_expected.to be_valid }
 
-  it "user should be present" do
+  it 'user should be present' do
     subject.user = nil
     is_expected.to_not be_valid
   end
-  it "post should be present" do
+  it 'post should be present' do
     subject.post = nil
     expect(subject).to be_invalid
   end
-
 end

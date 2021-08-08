@@ -3,7 +3,9 @@ class LikesController < ApplicationController
 
   def create
     post = Post.find(params[:id])
-    Like.create(user_id: current_user.id, post_id: post.id) if Like.where(user_id: current_user.id, post_id: post.id).blank?
+    if Like.where(user_id: current_user.id, post_id: post.id).blank?
+      Like.create(user_id: current_user.id, post_id: post.id)
+    end
     redirect_back(fallback_location: user_posts_path(post))
   end
 
@@ -12,5 +14,4 @@ class LikesController < ApplicationController
     Like.where(post_id: post.id, user_id: current_user.id).destroy_all
     redirect_back(fallback_location: user_posts_path(post))
   end
-
 end

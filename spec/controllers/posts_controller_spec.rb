@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
   let(:user) { create(:user) }
-  let(:params) { {user_id: user} }
+  let(:params) { { user_id: user } }
 
-  context "sign in user" do
+  context 'sign in user' do
     before { sign_in user }
 
     describe '#index' do
@@ -19,22 +19,22 @@ RSpec.describe PostsController, type: :controller do
 
     describe '#show' do
       let!(:post) { create(:post, user: user) }
-      let(:params) { { user_id: post.user_id, id: post} }
+      let(:params) { { user_id: post.user_id, id: post } }
       subject { get :show, params: params }
       it 'assigns @post' do
         subject
         expect(assigns(:post)).to eq(post)
       end
-      it { is_expected.to render_template(:show)}
+      it { is_expected.to render_template(:show) }
       context 'post without user data' do
-        let(:params) { { user_id: nil, id: post} }
-        it { expect {subject}.to raise_error ActionController::UrlGenerationError}
+        let(:params) { { user_id: nil, id: post } }
+        it { expect { subject }.to raise_error ActionController::UrlGenerationError }
       end
     end
 
     describe '#new' do
-      subject { get :new, params: params}
-      it { is_expected.to render_template :new}
+      subject { get :new, params: params }
+      it { is_expected.to render_template :new }
       it 'assigns new post' do
         subject
         expect(assigns(:post)).to be_a_new Post
@@ -42,12 +42,12 @@ RSpec.describe PostsController, type: :controller do
     end
 
     describe '#create' do
-      let!(:params) { {post: attributes_for(:post), user_id: user.id} }
+      let!(:params) { { post: attributes_for(:post), user_id: user.id } }
       subject { post :create, params: params }
 
       it 'create post' do
-        expect {subject}.to change {Post.count}.by(1)
-        is_expected.to redirect_to user_post_path(assigns(:user), assigns(:post ))
+        expect { subject }.to change { Post.count }.by(1)
+        is_expected.to redirect_to user_post_path(assigns(:user), assigns(:post))
       end
 
       it 'permit' do
@@ -55,16 +55,16 @@ RSpec.describe PostsController, type: :controller do
       end
 
       context 'when params invalid' do
-        let(:params) { { user_id: user.id, post: { description: nil}} }
+        let(:params) { { user_id: user.id, post: { description: nil } } }
         it { is_expected.to render_template :new }
         it { expect { subject }.not_to change { Post.count } }
       end
     end
 
     describe '#edit' do
-      let!(:post) {create :post, user: user}
-      let(:params) { { id: post, user_id: user} }
-      subject { process :edit, method: :get, params: params}
+      let!(:post) { create :post, user: user }
+      let(:params) { { id: post, user_id: user } }
+      subject { process :edit, method: :get, params: params }
 
       it { is_expected.to render_template :edit }
       it 'assigns server policy' do
@@ -74,56 +74,56 @@ RSpec.describe PostsController, type: :controller do
     end
 
     describe '#destroy' do
-      let!(:post) {create :post, user: user}
-      let(:params) { { id: post, user_id: user} }
-      subject { process :destroy, method: :delete, params: params}
+      let!(:post) { create :post, user: user }
+      let(:params) { { id: post, user_id: user } }
+      subject { process :destroy, method: :delete, params: params }
 
       it 'destroys record' do
-        expect {subject}.to change {Post.count}.by(-1)
+        expect { subject }.to change { Post.count }.by(-1)
         is_expected.to redirect_to(user_posts_path(assigns :user))
       end
 
       context 'Deleting a post removes the like too' do
-        let!(:like) {create :like, user: user, post: post}
+        let!(:like) { create :like, user: user, post: post }
         it 'destroy like' do
-          expect {subject}.to change {Like.count}.by(-1)
+          expect { subject }.to change { Like.count }.by(-1)
         end
       end
 
       context 'Deleting a post removes the comments too' do
-        let!(:comment) {create :comment, user: user, post: post}
+        let!(:comment) { create :comment, user: user, post: post }
         it 'destroy commentary' do
-          expect {subject}.to change {Comment.count}.by(-1)
+          expect { subject }.to change { Comment.count }.by(-1)
         end
       end
     end
 
     describe '#update' do
-      let!(:post) {create :post, user: user}
-      let(:params) { { id: post, user_id: user, post: { description: 'New decription! ;)'} } }
+      let!(:post) { create :post, user: user }
+      let(:params) { { id: post, user_id: user, post: { description: 'New decription! ;)' } } }
       subject { process :update, method: :put, params: params }
 
-      it { is_expected.to redirect_to(user_post_path(assigns(:user), assigns(:post)))}
+      it { is_expected.to redirect_to(user_post_path(assigns(:user), assigns(:post))) }
       it 'updates post' do
         expect { subject }.to change { post.reload.description }.to('New decription! ;)')
       end
 
       context 'with bad params' do
-        let(:params) { { id: post, user_id: user, post: { description: ''}} }
+        let(:params) { { id: post, user_id: user, post: { description: '' } } }
 
         it 'does not update post' do
-          expect { subject }.not_to change { post.reload.description}
+          expect { subject }.not_to change { post.reload.description }
         end
       end
     end
   end
 
-  context "sign out user" do
+  context 'sign out user' do
     before { sign_out user }
 
     describe '#new' do
-      subject { get :new, params: params}
-      it { is_expected.to redirect_to  new_user_session_path }
+      subject { get :new, params: params }
+      it { is_expected.to redirect_to new_user_session_path }
     end
 
     describe '#destroy' do
@@ -132,8 +132,8 @@ RSpec.describe PostsController, type: :controller do
       subject { process :destroy, method: :delete, params: params }
 
       it 'destroys record' do
-        expect {subject}.not_to change {Post.count}
-        is_expected.to redirect_to  new_user_session_path
+        expect { subject }.not_to change { Post.count }
+        is_expected.to redirect_to new_user_session_path
       end
     end
 
@@ -142,15 +142,15 @@ RSpec.describe PostsController, type: :controller do
       let(:params) { { id: post, user_id: user } }
       subject { process :edit, method: :get, params: params }
 
-      it { is_expected.to redirect_to  new_user_session_path }
+      it { is_expected.to redirect_to new_user_session_path }
     end
 
     describe '#update' do
       let!(:post) { create :post, user: user }
-      let(:params) { { id: post, user_id: user, post: { description: 'New decription! ;)'} } }
+      let(:params) { { id: post, user_id: user, post: { description: 'New decription! ;)' } } }
       subject { process :update, method: :put, params: params }
 
-      it { is_expected.to redirect_to  new_user_session_path}
+      it { is_expected.to redirect_to new_user_session_path }
       it 'updates post' do
         expect { subject }.not_to change { Post.count }
         expect { subject }.not_to change { post.reload.description }
@@ -169,7 +169,7 @@ RSpec.describe PostsController, type: :controller do
 
     describe '#show' do
       let!(:post) { create(:post, user: user) }
-      let(:params) { { user_id: post.user_id, id: post} }
+      let(:params) { { user_id: post.user_id, id: post } }
       subject { get :show, params: params }
       it 'assigns @post' do
         subject
@@ -177,11 +177,10 @@ RSpec.describe PostsController, type: :controller do
       end
       it { is_expected.to render_template(:show) }
       context 'post without user data' do
-        let(:params) { { user_id: nil, id: post} }
-        it { expect {subject}.to raise_error ActionController::UrlGenerationError }
+        let(:params) { { user_id: nil, id: post } }
+        it { expect { subject }.to raise_error ActionController::UrlGenerationError }
       end
     end
-
   end
 
   context 'log in other user' do
@@ -190,33 +189,33 @@ RSpec.describe PostsController, type: :controller do
     before { sign_in other_user }
 
     describe '#create' do
-      let!(:params) { {post: attributes_for(:post), user_id: user.id} }
+      let!(:params) { { post: attributes_for(:post), user_id: user.id } }
       subject { post :create, params: params }
 
       it 'create post' do
-        expect {subject}.to change {Post.where(user: other_user).count}.by(1)
-        expect {subject}.not_to change {Post.where(user: user).count}
-        is_expected.to redirect_to user_post_path(other_user, assigns(:post ))
+        expect { subject }.to change { Post.where(user: other_user).count }.by(1)
+        expect { subject }.not_to change { Post.where(user: user).count }
+        is_expected.to redirect_to user_post_path(other_user, assigns(:post))
       end
     end
     describe '#update' do
-      let!(:post) {create :post, user: user}
-      let(:params) { { id: post, user_id: user, post: { description: 'New decription! ;)'} } }
+      let!(:post) { create :post, user: user }
+      let(:params) { { id: post, user_id: user, post: { description: 'New decription! ;)' } } }
       subject { process :update, method: :put, params: params }
 
-      it { is_expected.to redirect_to root_path}
+      it { is_expected.to redirect_to root_path }
       it 'updates post' do
         expect { subject }.not_to change { post.reload.description }
       end
     end
 
     describe '#destroy' do
-      let!(:post) {create :post, user: user}
-      let(:params) { { id: post, user_id: user} }
-      subject { process :destroy, method: :delete, params: params}
+      let!(:post) { create :post, user: user }
+      let(:params) { { id: post, user_id: user } }
+      subject { process :destroy, method: :delete, params: params }
 
       it 'does not destroy record' do
-        expect {subject}.not_to change {Post.count}
+        expect { subject }.not_to change { Post.count }
         is_expected.to redirect_to root_path
       end
     end

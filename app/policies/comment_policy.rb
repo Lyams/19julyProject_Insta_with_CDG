@@ -17,5 +17,4 @@ class CommentPolicy
   def new?
     @user == @author
   end
-
 end

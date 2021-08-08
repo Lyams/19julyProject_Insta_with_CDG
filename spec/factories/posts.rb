@@ -3,8 +3,8 @@ FactoryBot.define do
     association :user
     description { Faker::GreekPhilosophers.quote }
     factory :post_invalid_image do
-      image { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/notimage.txt'), 'text/plain')}
+      image { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/notimage.txt'), 'text/plain') }
     end
-    image { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/Jove_decadent.jpg'),'image/jpeg')}
+    image { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/Jove_decadent.jpg'), 'image/jpeg') }
   end
 end

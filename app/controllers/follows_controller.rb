@@ -8,7 +8,8 @@ class FollowsController < ApplicationController
     end
 
   def destroy
-    if follow = Follow.find_by(follower: @follower_user, following: @following_user)
+    follow = Follow.find_by(follower: @follower_user, following: @following_user)
+    if follow.present?
       follow.destroy
     end
     redirect_back(fallback_location: user_followers_path(@follower_user))

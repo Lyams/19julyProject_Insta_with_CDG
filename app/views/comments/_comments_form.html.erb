@@ -1,28 +1,28 @@
 <%= form_for(@comment) do |form| %>
-<% if @comment.errors.any? %>
-<div id="error_explanation">
-    <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-    <ul>
+      <ul>
         <% @comment.errors.each do |error| %>
-        <li><%= error.full_message %></li>
+          <li><%= error.full_message %></li>
         <% end %>
-    </ul>
-</div>
-<% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<div class="field">
+  <div class="field">
     <%= form.label :commentary %>
-    <%= form.text_area :commentary, minlength: 3, class: 'form-control'%>
-</div>
+    <%= form.text_area :commentary, minlength: 3, class: 'form-control' %>
+  </div>
 
 
   <div class="form-group">
-    <%= form.hidden_field :post_id, value: @post.id, class:'d-none'%>
-    <%= form.hidden_field :user_id, value: current_user.id, class:'d-none'%>
+    <%= form.hidden_field :post_id, value: @post.id, class: 'd-none' %>
+    <%= form.hidden_field :user_id, value: current_user.id, class: 'd-none' %>
   </div>
 
-<div class="actions">
+  <div class="actions">
     <%= form.submit %>
-</div>
+  </div>
 <% end %>

@@ -9,29 +9,30 @@
 </p>
 
 <p>
-  <%= link_to (image_tag @post.image_url(:big_thumbnail)), (@post.image_url), class:"card-link", target: :_blank %>
+  <%= link_to (image_tag @post.image_url(:big_thumbnail)), (@post.image_url), class: "card-link", target: :_blank %>
 </p>
 
-  <% @comments.each do |comment| %>
+<% @comments.each do |comment| %>
   <p>
 
   <div class="card">
     <div class="card-body">
-      <p><strong><%= link_to comment.user.name, user_path(comment.user) , class:"card-link" %>:   </strong> <%= comment.commentary %><p>
+      <p><strong><%= link_to comment.user.name, user_path(comment.user), class: "card-link" %>
+        : </strong> <%= comment.commentary %><p>
     </div>
   </div>
-  <% end %>
+<% end %>
 
 </br>
 
 <% if user_signed_in? %>
   <%= render 'likes/likes_form', post: @post %>
-</br>
+  </br>
   <%= render 'comments/comments_form', comment: @comment %>
 <% else %>
   <p> For comments and likes need <%= link_to 'Log in', new_user_session_path %> </p>
-<%end %>
+<% end %>
 
 
-<%= link_to 'Edit', edit_user_post_path(@user, @post), class:'btn btn-warning' if user_signed_in? && policy(@post).update?%>
-<%= link_to 'Back', user_posts_path(@user), class:'btn btn-info' %>
+<%= link_to 'Edit', edit_user_post_path(@user, @post), class: 'btn btn-warning' if user_signed_in? && policy(@post).update? %>
+<%= link_to 'Back', user_posts_path(@user), class: 'btn btn-info' %>

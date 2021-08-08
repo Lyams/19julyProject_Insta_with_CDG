@@ -4,7 +4,7 @@
   <div class="row text-sm-left">
     <div class="row-sm">User name: <strong><%= @user.name %></strong></div>
     <div class="row-sm">User email: <strong><%= @user.email %></strong></div>
-    <div class="row-sm">User bio: <strong><em><%= @user.bio %></em></strong> </div>
+    <div class="row-sm">User bio: <strong><em><%= @user.bio %></em></strong></div>
   </div>
 </div>
 <br>
@@ -19,16 +19,16 @@
       </div>
     <% end %>
     <div class="col-sm">
-      <%  if current_user.present? && current_user != @user %>
-      <% unless has_following?(current_user, @user) %>
-        <%= link_to follows_path(following_id: @user.id), class: "btn btn-outline-info", method: :post do %>
-          Follow <i class="fas fa-user-friends"></i>
+      <% if current_user.present? && current_user != @user %>
+        <% unless has_following?(current_user, @user) %>
+          <%= link_to follows_path(following_id: @user.id), class: "btn btn-outline-info", method: :post do %>
+            Follow <i class="fas fa-user-friends"></i>
+          <% end %>
+        <% else %>
+          <%= link_to follow_path(following_id: @user.id), class: "btn btn-outline-info", method: :delete do %>
+            UnFollow <i class="fas fa-users-slash"></i>
+          <% end %>
         <% end %>
-      <% else %>
-        <%= link_to follow_path(following_id: @user.id), class: "btn btn-outline-info", method: :delete do %>
-          UnFollow <i class="fas fa-users-slash"></i>
-        <% end %>
-      <% end %>
       <% end %>
     </div>
   </div>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: %i[ index ]
+  before_action :set_user, except: %i[index]
   before_action :authenticate_user!, except: %i[show index]
 
   def show
@@ -7,8 +7,7 @@ class UsersController < ApplicationController
     @followings = @user.followings
   end
 
-  def edit
-  end
+  def edit; end
 
   def index
     @users = User.all
@@ -16,9 +15,9 @@ class UsersController < ApplicationController
 
   def update
     authorize @user
-    #@user = current_user
+    # @user = current_user
     if @user.update(user_update_params)
-      redirect_to user_path(@user), notice: "Users info was successfully updated."
+      redirect_to user_path(@user), notice: 'Users info was successfully updated.'
     else
       render :edit
     end

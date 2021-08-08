@@ -3,11 +3,9 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   belongs_to :user
   has_many :likes, dependent: :destroy
-  validates :description, presence: true, length: {minimum: 2}
+  validates :description, presence: true, length: { minimum: 2 }
   validates :image_data, presence: true
   before_save do
-    if valid?
-      image_derivatives!
-    end
+    image_derivatives! if valid?
   end
 end
