@@ -1,6 +1,6 @@
 <% if has_like?(post, current_user) %>
   <h1>
-  <%= link_to like_path(id: post.id), method: :delete do %>
+    <%= link_to like_path(id: post.id), method: :delete do %>
       <i class="fas fa-thumbs-up"></i><%= Like.where(post_id: post.id).count %>
     <% end %>
   </h1>

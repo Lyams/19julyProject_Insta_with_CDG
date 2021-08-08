@@ -7,7 +7,7 @@ RSpec.describe FollowersController, type: :controller do
   let!(:params) { { user_id: user.id } }
   subject { get :index, params: params }
 
-  context "sign in user" do
+  context 'sign in user' do
     before { sign_in user }
     describe '#index' do
       it 'assigns @followers' do
@@ -16,13 +16,13 @@ RSpec.describe FollowersController, type: :controller do
       end
     end
   end
-  context "sign out user" do
+  context 'sign out user' do
     before { sign_out user }
     describe '#index' do
       it 'assigns @follower' do
         subject
         expect(assigns(:followers)).to eq(nil)
-        is_expected.to redirect_to  new_user_session_path
+        is_expected.to redirect_to new_user_session_path
       end
     end
   end

@@ -23,8 +23,8 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'update' do
     context 'log in authorize user' do
-      before {sign_in user}
-      let(:params) { { id: user.id, user: {bio: 'I am greek', name: 'Plato2' } } }
+      before { sign_in user }
+      let(:params) { { id: user.id, user: { bio: 'I am greek', name: 'Plato2' } } }
       subject { process :update, method: :put, params: params }
 
       it 'updates users bio' do
@@ -46,15 +46,15 @@ RSpec.describe UsersController, type: :controller do
       let(:other_user) { create(:second_user) }
       before { sign_out user }
       before { sign_in other_user }
-      let(:params) { { id: user.id, user: {bio: 'I am greek', name: 'Plato2' } } }
+      let(:params) { { id: user.id, user: { bio: 'I am greek', name: 'Plato2' } } }
       subject { process :update, method: :put, params: params }
       it 'updates users bio' do
-         expect { subject }.to_not change { user.reload.bio }
+        expect { subject }.to_not change { user.reload.bio }
       end
       it 'updates users name' do
         expect { subject }.to_not change { user.reload.name }
       end
-      it { is_expected.to redirect_to root_path}
+      it { is_expected.to redirect_to root_path }
     end
   end
 end

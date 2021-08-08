@@ -5,7 +5,6 @@ RSpec.describe FollowsController, type: :controller do
   let!(:user2) { create(:second_user) }
   let!(:params) { { following_id: user2.id, id: user } }
   subject { process :create, params: params }
-
   before { sign_in user }
 
   describe '#create' do
@@ -61,5 +60,4 @@ RSpec.describe FollowsController, type: :controller do
       end
     end
   end
-
 end

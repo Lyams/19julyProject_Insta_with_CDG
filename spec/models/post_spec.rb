@@ -11,28 +11,22 @@ RSpec.describe Post, type: :model do
   it { is_expected.to validate_presence_of(:description) }
   it { is_expected.to validate_length_of(:description).is_at_least(2) }
   it { is_expected.to be_valid }
-
-  it "description should be present" do
+  it 'description should be present' do
     subject.description = nil
     is_expected.to_not be_valid
   end
-
-  it "image-data should be present" do
+  it 'image-data should be present' do
     expect(build(:post, image_data: nil)).to_not be_valid
   end
-
-  it "user_id should be present" do
+  it 'user_id should be present' do
     subject.user = nil
     expect(subject).to be_invalid
   end
-
-  it "description should not be blanc" do
-    subject.description = ""
+  it 'description should not be blanc' do
+    subject.description = ''
     expect(subject).to_not be_valid
   end
-
   it 'not image = not valid' do
-   expect(build(:post_invalid_image)).to be_invalid
+    expect(build(:post_invalid_image)).to be_invalid
   end
-
 end
