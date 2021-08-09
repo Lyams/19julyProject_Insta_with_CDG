@@ -27,6 +27,7 @@ RSpec.describe 'User', type: :feature do
     click_link_or_button 'New Post'
     fill_in 'Description', with: post.description
     page.attach_file 'spec/fixtures/files/Jove_decadent.jpg'
+    fill_in 'Title', with: post.title
     click_button 'Create Post'
     expect(page).to have_content 'Post was successfully created'
     expect(page).to have_content post.description

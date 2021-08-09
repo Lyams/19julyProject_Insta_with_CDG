@@ -1,12 +1,11 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: %i[show index]
+  before_action :authenticate_user!, except: %i[index]
   before_action :set_user, only: %i[show edit update destroy index create new]
   before_action :set_post, only: %i[show edit update destroy]
 
   # GET /posts or /posts.json
   def index
     @posts = @user.posts.order(created_at: :desc).page(params[:page])
-    @kind = "Posts of #{@user.name}"
   end
 
   # GET /posts/1 or /posts/1.json
@@ -74,6 +73,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:description, :image, :user_id)
+    params.require(:post).permit(:description, :image, :user_id, :title)
   end
 end

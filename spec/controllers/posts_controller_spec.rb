@@ -168,14 +168,10 @@ RSpec.describe PostsController, type: :controller do
     end
 
     describe '#show' do
-      let!(:post) { create(:post, user: user) }
+      let!(:post) { create(:post) }
       let(:params) { { user_id: post.user_id, id: post } }
       subject { get :show, params: params }
-      it 'assigns @post' do
-        subject
-        expect(assigns(:post)).to eq(post)
-      end
-      it { is_expected.to render_template(:show) }
+      it { is_expected.to redirect_to new_user_session_path }
       context 'post without user data' do
         let(:params) { { user_id: nil, id: post } }
         it { expect { subject }.to raise_error ActionController::UrlGenerationError }

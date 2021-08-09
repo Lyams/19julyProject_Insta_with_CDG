@@ -7,7 +7,7 @@
 <% else %>
   <h1>
     <%= link_to likes_path(id: post.id), method: :post do %>
-      <i class="far fa-thumbs-up"></i> <%= Like.where(post_id: post.id).count %>
+      <i class="far fa-thumbs-up"></i><%= Like.where(post_id: post.id).count %>
     <% end %>
   </h1>
 <% end %>

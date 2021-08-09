@@ -9,7 +9,12 @@
       </ul>
     </div>
   <% end %>
-  <div class="mb-3">
+  <div class="mb-6">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_area :title, minlength: 1, maxlength: 25, class: 'form-control' %>
+  </div>
+
+  <div class="mb-6">
     <%= form.label :description, class: "form-label" %>
     <%= form.text_area :description, minlength: 2, class: 'form-control' %>
   </div>
