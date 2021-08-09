@@ -305,7 +305,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers (~> 5.0)
   shrine (~> 3.0)
-  spring
+  spring (~> 2.1, >= 2.1.1)
   turbolinks (~> 5)
   web-console (>= 4.1.0)
   webdrivers (~> 4.6)

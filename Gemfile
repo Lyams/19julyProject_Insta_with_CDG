@@ -21,7 +21,6 @@ group :development, :test do
   gem 'faker', '~> 2.18'
   gem 'rspec-rails', '~> 5.0', '>= 5.0.1'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'spring'
 end
 
 group :test do
@@ -35,6 +34,7 @@ group :test do
 end
 
 group :development do
+  gem 'spring', '~> 2.1', '>= 2.1.1'
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'web-console', '>= 4.1.0'
