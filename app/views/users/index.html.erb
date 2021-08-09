@@ -1,6 +1,12 @@
 <div class="container">
 <h1>Some of our users</h1>
+<ul class="pagination justify-content-center">
+  <%= paginate @users %>
+</ul>
 <% @users.each do |user| %>
     <div class="row"> <%= link_to user.name ,user_path(user) %> </div>
 <% end %>
+<ul class="pagination justify-content-center">
+  <%= paginate @users %>
+</ul>
 </div>

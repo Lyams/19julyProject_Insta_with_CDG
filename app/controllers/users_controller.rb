@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def edit; end
 
   def index
-    @users = User.all
+    @users = User.order(:name).page(params[:page])
   end
 
   def update
