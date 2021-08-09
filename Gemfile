@@ -16,6 +16,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'image_processing', '~> 1.2'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'spring', '~> 2.1', '>= 2.1.1'
 
 group :development, :test do
   gem 'faker', '~> 2.18'
@@ -34,7 +35,6 @@ group :test do
 end
 
 group :development do
-  gem 'spring', '~> 2.1', '>= 2.1.1'
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'web-console', '>= 4.1.0'
