@@ -307,7 +307,6 @@ DEPENDENCIES
   shrine (~> 3.0)
   spring
   turbolinks (~> 5)
-  tzinfo-data
   web-console (>= 4.1.0)
   webdrivers (~> 4.6)
   webpacker (~> 5.0)
