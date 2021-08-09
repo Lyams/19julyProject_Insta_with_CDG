@@ -26,6 +26,7 @@
   @filename << 'public/placeholders/Vermeer-view-of-delft.jpg'
   Post.create!(
     user: @users.sample,
+    title: Faker::GreekPhilosophers.name,
     description:  Faker::GreekPhilosophers.quote ,
     image: File.new(Rails.root.join(@filename.sample)))
 end
