@@ -6,7 +6,6 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     @posts = @user.posts.order(created_at: :desc).page(params[:page])
-    @kind = "Posts of #{@user.name}"
   end
 
   # GET /posts/1 or /posts/1.json

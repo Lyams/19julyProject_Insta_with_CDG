@@ -7,7 +7,6 @@ class FeedPostsController < ApplicationController
     else
       @posts = Post.none.page(params[:page])
     end
-    @kind = 'Follow'
     render 'posts/index'
   end
 end
