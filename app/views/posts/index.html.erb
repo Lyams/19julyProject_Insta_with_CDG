@@ -1,4 +1,7 @@
 <h1><%= @kind %></h1>
+<ul class="pagination justify-content-center">
+  <%= paginate @posts %>
+</ul>
 <div class="row">
   <% @posts.each do |post| %>
     <div class="card" style="width: 23rem;">
@@ -31,6 +34,9 @@
 
 </div>
 <br>
+<ul class="pagination justify-content-center">
+  <%= paginate @posts %>
+</ul>
 <% if user_signed_in? %>
   <%= link_to 'My Posts', user_posts_path(current_user), class: "btn btn-outline-success" %>
   <%= link_to 'New Post', new_user_post_path(current_user), class: "btn btn-outline-primary" %>

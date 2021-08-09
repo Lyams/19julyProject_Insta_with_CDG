@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.3'
+gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'bootstrap', '~> 5.0.1'
 gem 'devise', '~> 4.8'
 gem 'pundit'

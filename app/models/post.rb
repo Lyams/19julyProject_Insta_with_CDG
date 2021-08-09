@@ -8,4 +8,5 @@ class Post < ApplicationRecord
   before_save do
     image_derivatives! if valid?
   end
+  paginates_per 8
 end

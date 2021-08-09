@@ -14,4 +14,5 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { minimum: 2 }
   validates :bio, length: { minimum: 2 }
   validates :email, presence: true, length: { minimum: 5 }, uniqueness: true
+  paginates_per 10
 end
