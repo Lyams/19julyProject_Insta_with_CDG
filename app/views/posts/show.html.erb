@@ -1,13 +1,8 @@
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
-
-<p>
-  <strong>Author:</strong>
+<p>  <strong>Title: </strong> <%= @post.title %> </p>
+<p>  <strong>Description: </strong> <%= @post.description %> </p>
+<p> <strong>Author: </strong>
   <%= link_to @post.user.name, user_path(@post.user) %>
 </p>
-
 <p>
   <%= link_to (image_tag @post.image_url(:big_thumbnail)), (@post.image_url), class: "card-link", target: :_blank %>
 </p>
