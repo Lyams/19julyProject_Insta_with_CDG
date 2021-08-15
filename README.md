@@ -10,6 +10,8 @@ It is a practice in the company Crimea Digital Group.
 * Rails version: 6.1
 * DataBase: PostgreSQL
 * Make sure you have installed ImageMagick
+* Gems: pundit, kaminari, devise, shrine
+* Test: rspec, capybara, factory_bot_rails, faker, shoulda-matchers
 
 ***To start up:***
  1. Clone and cd to the project.
@@ -18,4 +20,4 @@ It is a practice in the company Crimea Digital Group.
  4. Run `rails db:migrate` to create the tables.
  5. Run `rails server` to start the development server.
     
-***Deployed on:*** https://instaonrails.herokuapp.com
+***Deployed on:*** https://instaonrails.herokuapp.com (shutdown now)
