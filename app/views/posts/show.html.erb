@@ -23,7 +23,7 @@
 <% if user_signed_in? %>
   <%= render 'likes/likes_form', post: @post %>
   </br>
-  <%= render 'comments/comments_form', comment: @comment %>
+  <%= render 'comments/comments_form', post: @post, comment: @comment %>
 <% else %>
   <p> For comments and likes need <%= link_to 'Log in', new_user_session_path %> </p>
 <% end %>

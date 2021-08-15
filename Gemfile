@@ -15,13 +15,13 @@ gem 'pundit'
 gem 'rails', '~> 6.1.4'
 gem 'sass-rails', '>= 6'
 gem 'shrine', '~> 3.0'
-gem 'spring', '~> 2.1', '>= 2.1.1'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails', '~> 5.0', '>= 5.0.1'
+  gem 'spring', '~> 2.1', '>= 2.1.1'
 end
 
 group :test do

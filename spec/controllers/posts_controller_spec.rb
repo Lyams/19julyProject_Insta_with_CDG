@@ -181,7 +181,7 @@ RSpec.describe PostsController, type: :controller do
 
   context 'log in other user' do
     let(:other_user) { create(:second_user) }
-    before { sign_out user }
+    #before { sign_out user }
     before { sign_in other_user }
 
     describe '#create' do
