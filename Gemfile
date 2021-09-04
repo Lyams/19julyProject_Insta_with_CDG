@@ -35,6 +35,7 @@ group :test do
 end
 
 group :development do
+  gem 'bullet', '~> 6.1', '>= 6.1.5'
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'web-console', '>= 4.1.0'
