@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/scr/app
+      -  gem_cache:/gems
+    depends_on:
+      - database
+    environment:
+      DATABASE_HOST: database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  database:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  gem_cache:
+  db_data:
