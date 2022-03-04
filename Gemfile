@@ -19,6 +19,7 @@ gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
 
 group :development, :test do
+  gem 'brakeman', '~> 5.2', '>= 5.2.1'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails', '~> 5.0', '>= 5.0.1'
   gem 'spring', '~> 2.1', '>= 2.1.1'
