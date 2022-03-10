@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.3'
+ruby '2.7.5'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 # gem 'bootstrap', '~> 5.0.1'
 gem 'bootsnap', '>= 1.4.4', require: false
